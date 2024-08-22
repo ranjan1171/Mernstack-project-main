@@ -1,47 +1,11 @@
 .header {
-    height: 32vw;
+    height: 38vw; /* Increased height to make the image larger */
     margin: 30px auto;
-    margin-top: 5px;
-    background: url('./header_img.png') no-repeat center center;
-    background-size: cover;
+    background: url('/header_img.png') no-repeat center center;
+    background-size: cover; /* Cover to make the image larger and cover the entire header */
     position: relative;
-    
-    
-}
-
-.header-contents {
-    position: absolute;
-    display:flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 1.5vw;
-    max-width: 50%;
-    bottom: 20%;
-    left: 6vw;
-    animation: fadeIn 4s;
-}
-
-@keyframes textBounce {
-    0% { transform: translateY(0); }
-    25% { transform: translateY(-10px); }
-    50% { transform: translateY(0); }
-    75% { transform: translateY(-5px); }
-    100% { transform: translateY(0); }
-}
-
-@keyframes textColorChange {
-    0% { color: rgb(3, 219, 3); }
-    25% { color: rgb(255, 105, 180); } /* Light Pink */
-    50% { color: rgb(30, 144, 255); } /* Dodger Blue */
-    75% { color: rgb(255, 215, 0); } /* Gold */
-    100% { color: rgb(3, 219, 3); } /* Back to Base Color */
-}
-
-@keyframes textWave {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-    25% { transform: translateY(-5px); }
-    75% { transform: translateY(5px); }
+    overflow: hidden; /* To prevent overflow during animations */
+    margin-top: 1px;
 }
 
 .header-contents {
@@ -53,29 +17,20 @@
     max-width: 50%;
     bottom: 10%;
     left: 6vw;
-    z-index: 3; /* Ensures content is above both images */
-    animation: fadeIn 3s;
+    animation: fadeIn 3s ease-in-out;
 }
 
 .header-contents h2 {
     font-weight: 500;
+    color: white;
     font-size: max(4.5vw, 22px);
-    color: rgb(3, 219, 3); /* Base color for text */
-    animation: 
-        textGlowPulse 3s infinite, 
-        textShake 1s infinite,
-        textSlideIn 2s ease-out, 
-        textColorChange 10s infinite, 
-        textWave 1.5s ease-in-out infinite; /* Add bounce, color change, and wave effects */
+    animation: textZoom 2s ease-in-out infinite alternate, colorChange 8s infinite; /* Added colorChange animation */
 }
 
 .header-contents p {
+    color: black;
     font-size: 1vw;
-    color: black; /* Base color for text */
-    animation: 
-        textGlowPulse 3s infinite, 
-        textSlideIn 2s ease-out, 
-        textWave 2s ease-in-out infinite; /* Add wave effect */
+    /* No animation applied here */
 }
 
 .header-contents button {
@@ -86,15 +41,15 @@
     background: white;
     font-size: max(1vw, 13px);
     border-radius: 50px;
+    animation: buttonPulse 2s ease-in-out infinite; /* Only buttonPulse animation */
 }
 
 @media (max-width: 1050px) {
     .header {
-        height: 100vw;
+        height: 42vw; /* Adjust height for medium screens */
     }
-
     .header-contents {
-        max-width: 100%;
+        max-width: 45%;
     }
 }
 
@@ -102,31 +57,38 @@
     .header-contents {
         max-width: 55%;
     }
-
+    .header-contents p {
+        display: none;
+    }
     .header-contents button {
         padding: 2vw 4vw;
     }
 }
 
-
-@media (max-width: 1050px) {
-    .header {
-        height: 100vw;
-    }
-
-    .header-contents {
-        max-width: 100%;
-    }
+/* Keyframes for animations */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 750px) {
-    .header-contents {
-        max-width: 55%;
-    }
+@keyframes textZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
 
-    
+@keyframes buttonPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
 
-    .header-contents button {
-        padding: 2vw 4vw;
-    }
+/* Color change animation for h2 */
+@keyframes colorChange {
+    0% { color: #FF5733; }  /* Red */
+    14.3% { color: #33FF57; }  /* Green */
+    28.6% { color: #3357FF; }  /* Blue */
+    42.9% { color: #FF33A8; }  /* Pink */
+    57.2% { color: #FF8333; }  /* Orange */
+    71.5% { color: #FF3388; }  /* Magenta */
+    85.8% { color: #33FFF5; }  /* Cyan */
+    100% { color: #FF5733; }  /* Back to Red */
 }
